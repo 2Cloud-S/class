@@ -1,12 +1,70 @@
 ---
 title: "Economic Connectedness"
 format: html
+execute:
+    echo: FALSE
 ---
 
 
-```{r}
+```{r,message = FALSE}
 
+#| message: FALSE
 library(tidyverse)
 library(primer.data)
 
 ```
+
+
+```{r}
+# Load required packages
+library(tidyverse)
+
+# Load the mtcars dataset
+data(mtcars)
+
+# Create a scatter plot
+ggplot(data = mtcars, aes(x = wt, y = mpg, color = as.factor(cyl), size = hp)) +
+  geom_point(alpha = 0.8) +
+  scale_color_manual(values = c("4" = "#1f77b4", "6" = "#ff7f0e", "8" = "#2ca02c"),
+                     name = "Cylinders") +
+  scale_size_continuous(name = "Horsepower", range = c(3, 10)) +
+  labs(title = "Fuel Efficiency vs. Weight by Cylinders and Horsepower",
+       x = "Weight (1000 lbs)",
+       y = "Miles Per Gallon (mpg)",
+       caption = "Data from mtcars dataset") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+    axis.title = element_text(size = 12),
+    legend.position = "right",
+    legend.title = element_text(size = 10, face = "bold"),
+    legend.text = element_text(size = 8),
+    plot.caption = element_text(size = 8, hjust = 0)
+  )
+
+```
+
+### Description of the Plot:
+
+This scatter plot illustrates the relationship between car weight and fuel efficiency, using the mtcars dataset, which contains data on 32 car models from the 1970s. The plot is designed to be both informative and visually appealing, leveraging ggplot2’s capabilities for clear data visualization.
+
+## X-Axis (Weight): 
+Represents the weight of the cars in thousands of pounds (wt). The axis is labeled "Weight (1000 lbs)" for clarity.
+
+## Y-Axis (Fuel Efficiency): 
+Shows miles per gallon (mpg), labeled as "Miles Per Gallon (mpg)". Higher values indicate better fuel efficiency.
+
+## Points: 
+Each point represents a car, positioned according to its weight and fuel efficiency. The plot reveals a clear negative trend: heavier cars tend to have lower fuel efficiency.
+
+## Color (Cylinders): 
+Points are colored based on the number of cylinders (cyl), with three distinct categories: 4 cylinders (blue, #1f77b4), 6 cylinders (orange, #ff7f0e), and 8 cylinders (green, #2ca02c). The legend, labeled "Cylinders", shows this mapping. Cars with more cylinders are generally less fuel-efficient and heavier.
+
+## Size (Horsepower): 
+The size of each point corresponds to the car’s horsepower (hp), with larger points indicating higher horsepower. The size range is set between 3 and 10 to ensure readability, and the legend, labeled "Horsepower", provides the scale. Higher horsepower often aligns with heavier cars and lower fuel efficiency.
+
+## Aesthetics: 
+The plot uses a minimal theme (theme_minimal()) for a clean, modern look, with a semi-transparent point fill (alpha = 0.8) to handle overlapping points gracefully. The title, "Fuel Efficiency vs. Weight by Cylinders and Horsepower", is bold and centered, summarizing the plot’s purpose. Axis titles are clear and appropriately sized, and the caption notes the data source (mtcars dataset).
+
+## Insights: 
+The visualization highlights that cars with 4 cylinders are typically lighter and more fuel-efficient, while those with 8 cylinders are heavier and less efficient. Horsepower tends to increase with weight and cylinder count, reinforcing the trade-off between power and efficiency.
